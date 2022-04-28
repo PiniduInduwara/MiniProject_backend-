@@ -5,15 +5,18 @@ import com.MIniProject.model.Assignment;
 import com.MIniProject.repository.MiniProjectRepository;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @NoArgsConstructor
 @AllArgsConstructor
+@Slf4j
 public class AssignmentService {
 
     @Autowired
@@ -41,8 +44,27 @@ public class AssignmentService {
         newassignment.setLastUpdatedAt(assignmentCreate.getcLastUpdatedAt());
 
         return miniProjectRepository.save(newassignment);
-
     }
+
+
+    public Assignment changeStatus(Assignment asg,  String id){
+        Optional<Assignment> assignment = miniProjectRepository.findById(id);
+        if(assignment.isPresent()){
+            Assignment updatedAssignment = assignment.get();
+            updatedAssignment.setStatus(asg.getStatus());
+            return miniProjectRepository.save(updatedAssignment);
+        }else {
+            log.info("Assignment can not found");
+            return null;
+        }
+    }
+
+    public Assignment deleteAssignment(String id){
+        miniProjectRepository.deleteById(id);
+        return null;
+    }
+
+
 
 
 }
