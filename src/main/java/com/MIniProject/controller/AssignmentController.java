@@ -12,7 +12,7 @@ public class AssignmentController {
     @Autowired
     AssignmentService assignmentService;
 
-    @PostMapping("/")
+    @PostMapping("/assignment")
     public Assignment addAssignment(@RequestBody AssignmentCreate assignmentCreate){
         return assignmentService.addAssignment(assignmentCreate);
     }

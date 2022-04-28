@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -34,6 +35,7 @@ public class AssignmentService {
 
     public Assignment addAssignment(AssignmentCreate assignmentCreate){
         Assignment newassignment = new Assignment();
+
         newassignment.setId(assignmentCreate.getcId());
         newassignment.setAsgTitle(assignmentCreate.getcAsgTitle());
         newassignment.setInstrName(assignmentCreate.getcInstrName());
@@ -46,6 +48,41 @@ public class AssignmentService {
         return miniProjectRepository.save(newassignment);
     }
 
+    public Assignment changeAssignment(AssignmentCreate assignmentCreate, String id){
+        Assignment newassignment = new Assignment();
+
+        newassignment.setAsgTitle(assignmentCreate.getcAsgTitle());
+        newassignment.setInstrName(assignmentCreate.getcInstrName());
+        newassignment.setStdName(assignmentCreate.getcStdName());
+        newassignment.setDeadline(assignmentCreate.getcDeadline());
+
+        Optional<Assignment> currentAssignment = miniProjectRepository.findById(id);
+
+        if(currentAssignment.isPresent()){
+            Assignment updateAssignment = currentAssignment.get();
+            updateAssignment.setLastUpdatedAt(new Date());
+            if(newassignment.getAsgTitle() !=null){
+                updateAssignment.setAsgTitle(newassignment.getAsgTitle());
+            }
+            if(newassignment.getInstrName() !=null){
+                updateAssignment.setInstrName(newassignment.getInstrName());
+            }
+            if(newassignment.getStdName() !=null){
+                updateAssignment.setStdName(newassignment.getStdName());
+            }
+            if(newassignment.getDeadline() !=null){
+                updateAssignment.setDeadline(newassignment.getDeadline());
+            }
+
+            return miniProjectRepository.save(updateAssignment);
+
+        }else {
+            log.info("Assignment can not found");
+            return null;
+        }
+
+
+    }
 
     public Assignment changeStatus(Assignment asg,  String id){
         Optional<Assignment> assignment = miniProjectRepository.findById(id);
