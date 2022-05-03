@@ -25,8 +25,8 @@ public class AssignmentController {
     }
 
     @PostMapping("/assignment")
-    public Assignment addAssignment(@RequestBody AssignmentCreate assignmentCreate){
-        return assignmentService.addAssignment(assignmentCreate);
+    public Assignment addAssignment(@RequestBody Assignment assignment){
+        return assignmentService.addAssignment(assignment);
     }
 
     @PutMapping("/status/{assignmentId}")

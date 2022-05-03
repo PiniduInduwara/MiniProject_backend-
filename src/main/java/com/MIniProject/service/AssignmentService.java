@@ -33,19 +33,19 @@ public class AssignmentService {
         return miniProjectRepository.findById(id).get();
     }
 
-    public Assignment addAssignment(AssignmentCreate assignmentCreate){
-        Assignment newassignment = new Assignment();
+    public Assignment addAssignment(Assignment assignment){
+//        Assignment newassignment = new Assignment();
+//
+//        newassignment.setId(assignmentCreate.getcId());
+//        newassignment.setAsgTitle(assignmentCreate.getcAsgTitle());
+//        newassignment.setInstrName(assignmentCreate.getcInstrName());
+//        newassignment.setStdName(assignmentCreate.getcStdName());
+//        newassignment.setStatus(assignmentCreate.getcStatus());
+//        newassignment.setDeadline(assignmentCreate.getcDeadline());
+//        newassignment.setAsgUploadedAt(assignmentCreate.getcAsgUploadedAt());
+//        newassignment.setLastUpdatedAt(assignmentCreate.getcLastUpdatedAt());
 
-        newassignment.setId(assignmentCreate.getcId());
-        newassignment.setAsgTitle(assignmentCreate.getcAsgTitle());
-        newassignment.setInstrName(assignmentCreate.getcInstrName());
-        newassignment.setStdName(assignmentCreate.getcStdName());
-        newassignment.setStatus(assignmentCreate.getcStatus());
-        newassignment.setDeadline(assignmentCreate.getcDeadline());
-        newassignment.setAsgUploadedAt(assignmentCreate.getcAsgUploadedAt());
-        newassignment.setLastUpdatedAt(assignmentCreate.getcLastUpdatedAt());
-
-        return miniProjectRepository.save(newassignment);
+        return miniProjectRepository.save(assignment);
     }
 
     public Assignment changeAssignment(AssignmentCreate assignmentCreate, String id){
