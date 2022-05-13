@@ -19,8 +19,8 @@ public class AssignmentController {
         return assignmentService.getAllAssignments();
     }
 
-    @PostMapping("/assignment/{assignmentId}")
-    public Assignment getAssignmentsById(@PathVariable("/assignemnt/{assignmentId}") String id){
+    @GetMapping("/assignment/{assignmentId}")
+    public Assignment getAssignmentsById(@PathVariable("assignmentId") String id){
         return assignmentService.getAssignmentsById(id);
     }
 
@@ -35,8 +35,8 @@ public class AssignmentController {
     }
 
     @PutMapping("/assignment/{assignmentId}")
-    public Assignment changeAssignment(@PathVariable("assignmentId")String id, @RequestBody AssignmentCreate assignmentCreate){
-        return assignmentService.changeAssignment(assignmentCreate, id);
+    public Assignment changeAssignment(@PathVariable("assignmentId")String id, @RequestBody Assignment assignment){
+        return assignmentService.changeAssignment(assignment, id);
     }
 
     @DeleteMapping("/assignment/{assignmentId}")

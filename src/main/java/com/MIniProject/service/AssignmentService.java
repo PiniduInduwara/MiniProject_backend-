@@ -48,19 +48,19 @@ public class AssignmentService {
         return miniProjectRepository.save(assignment);
     }
 
-    public Assignment changeAssignment(AssignmentCreate assignmentCreate, String id){
+    public Assignment changeAssignment(Assignment assignment, String id){
         Assignment newassignment = new Assignment();
 
-        newassignment.setAsgTitle(assignmentCreate.getcAsgTitle());
-        newassignment.setInstrName(assignmentCreate.getcInstrName());
-        newassignment.setStdName(assignmentCreate.getcStdName());
-        newassignment.setDeadline(assignmentCreate.getcDeadline());
+        newassignment.setAsgTitle(assignment.getAsgTitle());
+        newassignment.setInstrName(assignment.getInstrName());
+        newassignment.setStdName(assignment.getStdName());
+       // newassignment.setDeadline(assignmentCreate.getcDeadline());
 
         Optional<Assignment> currentAssignment = miniProjectRepository.findById(id);
 
         if(currentAssignment.isPresent()){
             Assignment updateAssignment = currentAssignment.get();
-            updateAssignment.setLastUpdatedAt(new Date());
+            //updateAssignment.setLastUpdatedAt(new Date());
             if(newassignment.getAsgTitle() !=null){
                 updateAssignment.setAsgTitle(newassignment.getAsgTitle());
             }
@@ -70,9 +70,9 @@ public class AssignmentService {
             if(newassignment.getStdName() !=null){
                 updateAssignment.setStdName(newassignment.getStdName());
             }
-            if(newassignment.getDeadline() !=null){
-                updateAssignment.setDeadline(newassignment.getDeadline());
-            }
+//            if(newassignment.getDeadline() !=null){
+//                updateAssignment.setDeadline(newassignment.getDeadline());
+//            }
 
             return miniProjectRepository.save(updateAssignment);
 

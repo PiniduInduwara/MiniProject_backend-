@@ -1,10 +1,10 @@
 package com.MIniProject.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.*;
+import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.Date;
@@ -13,18 +13,22 @@ import java.util.Date;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 @Document("assignment")
 public class Assignment {
 
     @Id
     private String id;
-    private String AsgTitle;
-    private String InstrName;
-    private String StdName;
+    private String asgTitle;
+    private String instrName;
+    private String stdName;
     private String status;
-    private Date deadline;
-    private Date AsgUploadedAt;
-    private Date LastUpdatedAt;
+//    @JsonFormat(pattern = "yyyy-MM-dd")
+//    private Date deadline;
+//    @CreatedDate
+//    private Date asgUploadedAt;
+//    @LastModifiedDate
+//    private Date lastUpdatedAt;
 
 
 }
