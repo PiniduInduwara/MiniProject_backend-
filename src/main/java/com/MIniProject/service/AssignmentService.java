@@ -1,6 +1,6 @@
 package com.MIniProject.service;
 
-import com.MIniProject.create.AssignmentCreate;
+import com.MIniProject.exception.ApiRequestException;
 import com.MIniProject.model.Assignment;
 import com.MIniProject.repository.MiniProjectRepository;
 import lombok.AllArgsConstructor;
@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -34,51 +33,39 @@ public class AssignmentService {
     }
 
     public Assignment addAssignment(Assignment assignment){
-//        Assignment newassignment = new Assignment();
-//
-//        newassignment.setId(assignmentCreate.getcId());
-//        newassignment.setAsgTitle(assignmentCreate.getcAsgTitle());
-//        newassignment.setInstrName(assignmentCreate.getcInstrName());
-//        newassignment.setStdName(assignmentCreate.getcStdName());
-//        newassignment.setStatus(assignmentCreate.getcStatus());
-//        newassignment.setDeadline(assignmentCreate.getcDeadline());
-//        newassignment.setAsgUploadedAt(assignmentCreate.getcAsgUploadedAt());
-//        newassignment.setLastUpdatedAt(assignmentCreate.getcLastUpdatedAt());
-
         return miniProjectRepository.save(assignment);
     }
 
     public Assignment changeAssignment(Assignment assignment, String id){
-        Assignment newassignment = new Assignment();
 
-        newassignment.setAsgTitle(assignment.getAsgTitle());
-        newassignment.setInstrName(assignment.getInstrName());
-        newassignment.setStdName(assignment.getStdName());
-       // newassignment.setDeadline(assignmentCreate.getcDeadline());
+        assignment.setAsgTitle(assignment.getAsgTitle());
+        assignment.setInstrName(assignment.getInstrName());
+        assignment.setStdName(assignment.getStdName());
 
         Optional<Assignment> currentAssignment = miniProjectRepository.findById(id);
 
         if(currentAssignment.isPresent()){
             Assignment updateAssignment = currentAssignment.get();
-            //updateAssignment.setLastUpdatedAt(new Date());
-            if(newassignment.getAsgTitle() !=null){
-                updateAssignment.setAsgTitle(newassignment.getAsgTitle());
+            if(assignment.getAsgTitle() !=null ){
+                updateAssignment.setAsgTitle(assignment.getAsgTitle());
             }
-            if(newassignment.getInstrName() !=null){
-                updateAssignment.setInstrName(newassignment.getInstrName());
+            if(assignment.getInstrName() !=null){
+                updateAssignment.setInstrName(assignment.getInstrName());
             }
-            if(newassignment.getStdName() !=null){
-                updateAssignment.setStdName(newassignment.getStdName());
+            if(assignment.getStdName() !=null){
+                updateAssignment.setStdName(assignment.getStdName());
             }
-//            if(newassignment.getDeadline() !=null){
-//                updateAssignment.setDeadline(newassignment.getDeadline());
-//            }
 
+//            if(assignment.getAsgTitle() !=null || assignment.getInstrName() !=null || assignment.getStdName() !=null)
+//            {
+//                updateAssignment.setAsgTitle(assignment.getAsgTitle());
+//                updateAssignment.setInstrName(assignment.getInstrName());
+//                updateAssignment.setStdName(assignment.getStdName());
+//            }
             return miniProjectRepository.save(updateAssignment);
 
         }else {
-            log.info("Assignment can not found");
-            return null;
+            throw new ApiRequestException("Assignment Cannot Found");
         }
 
 
