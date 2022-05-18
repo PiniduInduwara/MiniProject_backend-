@@ -16,8 +16,8 @@ public class Status {
 
     public String message;
 
-    public Status(StatusConstant.HttpConstant httpConstants) {
-        this.code = httpConstants.getCode();
-        this.message = httpConstants.getDesc();
+    public Status(StatusConstant.HttpConstant httpConstant) {
+        this.code = httpConstant.getCode();
+        this.message = httpConstant.getDesc();
     }
 }
