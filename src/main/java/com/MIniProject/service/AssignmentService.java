@@ -38,6 +38,7 @@ public class AssignmentService {
 
     public Assignment changeAssignment(Assignment assignment, String id){
 
+        assignment.setId(assignment.getId());
         assignment.setAsgTitle(assignment.getAsgTitle());
         assignment.setInstrName(assignment.getInstrName());
         assignment.setStdName(assignment.getStdName());
@@ -46,6 +47,9 @@ public class AssignmentService {
 
         if(currentAssignment.isPresent()){
             Assignment updateAssignment = currentAssignment.get();
+            if (assignment.getId() != null){
+                updateAssignment.setId((assignment.getId()));
+            }
             if(assignment.getAsgTitle() !=null ){
                 updateAssignment.setAsgTitle(assignment.getAsgTitle());
             }

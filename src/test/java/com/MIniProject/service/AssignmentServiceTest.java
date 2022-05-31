@@ -1,6 +1,5 @@
 package com.MIniProject.service;
 
-import com.MIniProject.create.AssignmentCreate;
 import com.MIniProject.model.Assignment;
 import com.MIniProject.repository.MiniProjectRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -8,8 +7,6 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Optional;
 
@@ -48,14 +45,15 @@ public class AssignmentServiceTest {
         assignment.setStdName("Mahinda");
         assignment.setStatus("half");
 
-        doReturn(assignment).when(miniProjectRepository).save(any(Assignment.class));
-        assertEquals(assignment, assignmentService.addAssignment(assignment));
+
+          doReturn(assignment).when(miniProjectRepository).save(any(Assignment.class));
+          assertEquals(assignment, assignmentService.addAssignment(assignment));
     }
 
     @Test
     void getAssignmentsByIdTest(){
-       doReturn(Optional.of(assignment)).when(miniProjectRepository).findById("Test_Id");
-       assertEquals(assignment, assignmentService.getAssignmentsById("Test_Id"));
+       doReturn(Optional.of(assignment)).when(miniProjectRepository).findById("AF4561");
+       assertEquals(assignment, assignmentService.getAssignmentsById("AF4561"));
     }
 
     @Test
@@ -76,8 +74,8 @@ public class AssignmentServiceTest {
         doReturn(assignment).when(miniProjectRepository).save(any(Assignment.class));
         assertEquals(assignment, assignmentService.addAssignment(assignment));
 
-        doReturn(Optional.ofNullable(assignment)).when(miniProjectRepository).findById("Test_Id");
-        assertEquals(assignment, assignmentService.changeAssignment(assignment, "Test_Id"));
+        doReturn(Optional.ofNullable(assignment)).when(miniProjectRepository).findById("AF4561");
+        assertEquals(assignment, assignmentService.changeAssignment(assignment, "AF4561"));
     }
 
     @Test
@@ -101,8 +99,8 @@ public class AssignmentServiceTest {
         assignment.setStatus("half");
 
         doReturn(assignment).when(miniProjectRepository).save(any(Assignment.class));
-        doReturn(Optional.ofNullable(assignment)).when(miniProjectRepository).findById("Test_Id");
-        assertEquals(assignment, assignmentService.changeStatus(assignment, "Test_Id"));
+        doReturn(Optional.ofNullable(assignment)).when(miniProjectRepository).findById("AF4561");
+        assertEquals(assignment, assignmentService.changeStatus(assignment, "AF4561"));
     }
 
     @Test
@@ -110,8 +108,8 @@ public class AssignmentServiceTest {
         assignment = new Assignment();
         assignment.setStatus("half");
 
-        doReturn(Optional.ofNullable(null)).when(miniProjectRepository).findById("Test_Id");
-        assertEquals(null, assignmentService.changeStatus(assignment, "Test_Id"));
+        doReturn(Optional.ofNullable(null)).when(miniProjectRepository).findById("AF4561");
+        assertEquals(null, assignmentService.changeStatus(assignment, "AF4561"));
     }
 
 //    @Test
